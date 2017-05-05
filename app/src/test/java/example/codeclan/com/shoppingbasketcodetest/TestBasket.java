@@ -20,8 +20,8 @@ public class TestBasket {
     @Before
     public void before(){
         basket = new Basket();
-        item1 = new Item("Eggs", 2, 2.0, false);
-        item2 = new Item("Milk", 1, 1.5, true);
+        item1 = new Item("Eggs", 2, 1.5, false);
+        item2 = new Item("Milk", 1, 2.5, true);
         item3 = new Item("Bread", 3, 1.0, false);
         basket.addToBasket(item1);
         basket.addToBasket(item2);
@@ -43,6 +43,11 @@ public class TestBasket {
     public void testCanEmptyBasket(){
         basket.empty();
         assertEquals(0, basket.size());
+    }
+
+    @Test
+    public void testTotalCostOfBasketBeforeDisc(){
+        assertEquals(5.0, basket.totalCostBeforeDis());
     }
 
 }

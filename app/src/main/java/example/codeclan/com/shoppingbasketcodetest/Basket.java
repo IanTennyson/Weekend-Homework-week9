@@ -1,6 +1,7 @@
 package example.codeclan.com.shoppingbasketcodetest;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 
 /**
@@ -22,11 +23,23 @@ public class Basket {
         return basket.size();
     }
 
+    public void remove(Item item) {
+        basket.remove(item);
+    }
+
     public void empty(){
         basket.clear();
     }
 
-    public void remove(Item item) {
-        basket.remove(item);
+
+    public double totalCostBeforeDis() {
+        for (int i = 0; i < basket.size(); i++){
+            double totalCostBeforeDiscount = 0.0;
+            for (Item item : basket) {
+                totalCostBeforeDiscount += item.getPrice();
+            }
+            return totalCostBeforeDiscount;
+        }
+        return 0.0;
     }
 }
