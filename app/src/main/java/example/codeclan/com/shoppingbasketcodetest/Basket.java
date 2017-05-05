@@ -8,4 +8,25 @@ import java.util.HashMap;
  */
 
 public class Basket {
+    private ArrayList<Item> basket;
+
+    public Basket(){
+        basket = new ArrayList<>();
+    }
+
+    public void addToBasket(Item item){
+        basket.add(item);
+    }
+
+    public int size(){
+        return basket.size();
+    }
+
+    public void empty(){
+        basket.clear();
+    }
+
+    public void remove(Item item) {
+        basket.remove(item);
+    }
 }
