@@ -1,5 +1,7 @@
 package example.codeclan.com.shoppingbasketcodetest;
 
+import android.content.Context;
+
 import java.util.ArrayList;
 
 /**
@@ -12,9 +14,13 @@ public class Basket{
     private Bogof bogof;
 
     public Basket(){
-        basket = new ArrayList<>();
+        basket = new ArrayList<Item>();
         tenPercent = new TenPercent();
         bogof = new Bogof();
+    }
+
+    public ArrayList<Item> getItemList(){
+        return this.basket;
     }
 
     public void addToBasket(Item item){
@@ -35,7 +41,6 @@ public class Basket{
 
 
     public Double totalCostBeforeDiscount() {
-        for (int i = 0; i < basket.size(); i++){
             double totalCostBeforeDiscount = 0.0;
             for (Item item : basket) {
                 Food food = (Food) item;
@@ -43,21 +48,37 @@ public class Basket{
                 totalCostBeforeDiscount += priceByQuantity;
             }
             return totalCostBeforeDiscount;
-        }
-        return 0.0;
     }
 
     public Double checkBogof(){
         Double beforeDis = totalCostBeforeDiscount();
-        Double bogofChecked = bogof.discount(beforeDis);
+        Double bogofChecked = discount(beforeDis);
         return bogofChecked;
     }
 
-    public Double checkTenPercent(){
-        Double beforeDis = checkBogof();
-        Double discountCheckedPrice = tenPercent.discount(beforeDis);
-        return discountCheckedPrice;
-    }
+//    public Double checkTenPercent(){
+//        Double beforeDis = checkBogof();
+//        Double discountCheckedPrice = tenPercent.discount(beforeDis);
+//        return discountCheckedPrice;
+//    }
 
+    public Double discount(Double priceBeforeDiscounts) {
+            for (Item item : Basket.this.getItemList()) {
+                Food food = (Food) item;
+                if (food.getBogof() && food.getQuantity() > 1) {
+                    if (food.getQuantity() % 2 == 0) {
+                        double halfTheQuantity = food.getQuantity() / 2;
+                        double HalfOff = halfTheQuantity * food.getPrice();
+                        priceBeforeDiscounts = priceBeforeDiscounts - HalfOff;
+                    } else {
+                        double quantityMadeEven = food.getQuantity() - 1;
+                        double halfTheQuantity = quantityMadeEven / 2;
+                        double HalfOff = halfTheQuantity * food.getPrice();
+                        priceBeforeDiscounts = priceBeforeDiscounts - HalfOff;
+                    }
+                }
+            }
+        return priceBeforeDiscounts;
+        }
 
 }

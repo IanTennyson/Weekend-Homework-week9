@@ -5,5 +5,5 @@ package example.codeclan.com.shoppingbasketcodetest;
  */
 
 public interface Discount {
-    Double discount(Double arg);
+
 }
