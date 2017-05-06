@@ -6,14 +6,16 @@ import java.util.ArrayList;
  * Created by user on 05/05/2017.
  */
 
-public class Basket {
+public class Basket{
     private ArrayList<Item> basket;
+    private TenPercent tenPercent;
 
     public Basket(){
         basket = new ArrayList<>();
+        tenPercent = new TenPercent();
     }
 
-    public void addToBasket(Food item){
+    public void addToBasket(Item item){
         basket.add(item);
     }
 
@@ -21,7 +23,7 @@ public class Basket {
         return basket.size();
     }
 
-    public void remove(Food item) {
+    public void remove(Item item) {
         basket.remove(item);
     }
 
@@ -30,11 +32,10 @@ public class Basket {
     }
 
 
-    public double totalCostBeforeDis() {
+    public Double totalCostBeforeDiscount() {
         for (int i = 0; i < basket.size(); i++){
             double totalCostBeforeDiscount = 0.0;
             for (Item item : basket) {
-
                 Food food = (Food) item;
                 totalCostBeforeDiscount += food.getPrice();
             }
@@ -43,14 +44,11 @@ public class Basket {
         return 0.0;
     }
 
+    public Double checkTenPercent(){
+        Double beforeDis = totalCostBeforeDiscount();
+        Double discountCheckedPrice = tenPercent.discount(beforeDis);
+        return discountCheckedPrice;
+    }
+
 
 }
-
-//    @Test
-//    public void canThrowUpChicken(){
-//        bear.eat(chicken);
-//        bear.eat(human);
-//        Edible food = bear.throwUp();
-//        Chicken original = (Chicken) food;
-//        assertEquals("Cluck Cluck", original.cluck());
-//    }
