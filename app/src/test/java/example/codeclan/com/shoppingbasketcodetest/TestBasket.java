@@ -20,9 +20,9 @@ public class TestBasket {
     @Before
     public void before(){
         basket = new Basket();
-        food1 = new Food("Eggs", 2, 10.0, false);
-        food2 = new Food("Milk", 1, 5.0, true);
-        food3 = new Food("Bread", 3, 5.0, false);
+        food1 = new Food("Eggs", 1, 10.0, false);
+        food2 = new Food("Milk", 2, 5.0, true);
+        food3 = new Food("Bread", 1, 5.0, false);
         basket.addToBasket(food1);
         basket.addToBasket(food2);
         basket.addToBasket(food3);
@@ -45,14 +45,19 @@ public class TestBasket {
         assertEquals(0, basket.size());
     }
 
-    @Test
-    public void testTotalCostOfBasketBeforeDisc(){
-        assertEquals(20.0, basket.totalCostBeforeDiscount());
-    }
+//    @Test
+//    public void testTotalCostOfBasketBeforeDisc(){
+//        assertEquals(20.0, basket.totalCostBeforeDiscount());
+//    }
 
     @Test
-    public void  testPriceHasBeenReducedByTenPercent(){
-        assertEquals(18.0, basket.checkTenPercent());
+    public void testBogofHasBeenReduced(){
+        assertEquals(20.0, basket.checkBogof());
     }
+
+//    @Test
+//    public void  testPriceHasBeenReducedByTenPercent(){
+//        assertEquals(18.0, basket.checkTenPercent());
+//    }
 
 }

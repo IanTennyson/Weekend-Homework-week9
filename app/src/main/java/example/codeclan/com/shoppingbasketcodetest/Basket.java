@@ -9,10 +9,12 @@ import java.util.ArrayList;
 public class Basket{
     private ArrayList<Item> basket;
     private TenPercent tenPercent;
+    private Bogof bogof;
 
     public Basket(){
         basket = new ArrayList<>();
         tenPercent = new TenPercent();
+        bogof = new Bogof();
     }
 
     public void addToBasket(Item item){
@@ -37,15 +39,22 @@ public class Basket{
             double totalCostBeforeDiscount = 0.0;
             for (Item item : basket) {
                 Food food = (Food) item;
-                totalCostBeforeDiscount += food.getPrice();
+                Double priceByQuantity = food.getPrice() * food.getQuantity();
+                totalCostBeforeDiscount += priceByQuantity;
             }
             return totalCostBeforeDiscount;
         }
         return 0.0;
     }
 
-    public Double checkTenPercent(){
+    public Double checkBogof(){
         Double beforeDis = totalCostBeforeDiscount();
+        Double bogofChecked = bogof.discount(beforeDis);
+        return bogofChecked;
+    }
+
+    public Double checkTenPercent(){
+        Double beforeDis = checkBogof();
         Double discountCheckedPrice = tenPercent.discount(beforeDis);
         return discountCheckedPrice;
     }
