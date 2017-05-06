@@ -3,8 +3,6 @@ package example.codeclan.com.shoppingbasketcodetest;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.math.BigDecimal;
-
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
@@ -13,56 +11,56 @@ import static junit.framework.Assert.assertTrue;
  * Created by user on 05/05/2017.
  */
 
-public class TestItem {
+public class TestFood {
 
-    Item item1;
-    Item item2;
-    Item item3;
+    Food food1;
+    Food food2;
+    Food food3;
 
     @Before
     public void before(){
-        item1 = new Item("Eggs", 2, 2.0, false);
-        item2 = new Item("Milk", 1, 1.5, true);
-        item3 = new Item("Bread", 3, 1.0, false);
+        food1 = new Food("Eggs", 2, 2.0, false);
+        food2 = new Food("Milk", 1, 1.5, true);
+        food3 = new Food("Bread", 3, 1.0, false);
     }
 
     @Test
     public void testItemOneName(){
-        assertEquals("Eggs", item1.getName());
+        assertEquals("Eggs", food1.getName());
     }
 
     @Test
     public void testSetItemOneName(){
-        item1.setName("Apples");
-        assertEquals("Apples", item1.getName());
+        food1.setName("Apples");
+        assertEquals("Apples", food1.getName());
     }
 
     @Test
     public void testItemOneQuantity(){
-        assertEquals(2, item1.getQuantity());
+        assertEquals(2, food1.getQuantity());
     }
 
     @Test
     public void testSetQuantity(){
-        item1.setQuantity(4);
-        assertEquals(4, item1.getQuantity());
+        food1.setQuantity(4);
+        assertEquals(4, food1.getQuantity());
     }
 
     @Test
     public void testItemOnePrice(){
-        assertEquals(2.0, item1.getPrice());
+        assertEquals(2.0, food1.getPrice());
     }
 
     @Test
     public void testSetPrice(){
-        item1.setPrice(4.0);
-        assertEquals(4.0, item1.getPrice());
+        food1.setPrice(4.0);
+        assertEquals(4.0, food1.getPrice());
     }
 
     @Test
     public void testBOGOF(){
-        assertFalse(item1.getBogof());
-        assertTrue(item2.getBogof());
+        assertFalse(food1.getBogof());
+        assertTrue(food2.getBogof());
     }
 
 }

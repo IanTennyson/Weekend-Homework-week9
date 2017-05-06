@@ -13,19 +13,19 @@ import static junit.framework.Assert.assertFalse;
 public class TestBasket {
 
     Basket basket;
-    Item item1;
-    Item item2;
-    Item item3;
+    Food food1;
+    Food food2;
+    Food food3;
 
     @Before
     public void before(){
         basket = new Basket();
-        item1 = new Item("Eggs", 2, 1.5, false);
-        item2 = new Item("Milk", 1, 2.5, true);
-        item3 = new Item("Bread", 3, 1.0, false);
-        basket.addToBasket(item1);
-        basket.addToBasket(item2);
-        basket.addToBasket(item3);
+        food1 = new Food("Eggs", 2, 1.5, false);
+        food2 = new Food("Milk", 1, 2.5, true);
+        food3 = new Food("Bread", 3, 1.0, false);
+        basket.addToBasket(food1);
+        basket.addToBasket(food2);
+        basket.addToBasket(food3);
     }
 
     @Test
@@ -35,7 +35,7 @@ public class TestBasket {
 
     @Test
     public void testCanRemoveSpecificItem(){
-        basket.remove(item3);
+        basket.remove(food3);
         assertEquals(2, basket.size());
     }
 
