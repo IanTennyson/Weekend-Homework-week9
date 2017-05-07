@@ -14,15 +14,19 @@ import example.codeclan.com.shoppingbasketcodetest.Interfaces.Objectable;
 
 public class Basket implements Objectable {
     private ArrayList<Itemable> basket;
+    private Boolean card;
     private TenPercent tenPercent;
     private Bogof bogof;
     private LoyaltyCard loyaltyCard;
 
-    public Basket(){
+
+    public Basket(Boolean card){
+        this.card = card;
         basket = new ArrayList<Itemable>();
         tenPercent = new TenPercent();
         bogof = new Bogof();
-    }
+        loyaltyCard = new LoyaltyCard();
+        }
 
     public ArrayList<Itemable> getItemList(){
         return this.basket;
@@ -44,26 +48,36 @@ public class Basket implements Objectable {
         basket.clear();
     }
 
+    public Boolean getCard(){
+        return this.card;
+    }
+
     public Double totalCostBeforeDiscount() {
-            double totalCostBeforeDiscount = 0.0;
+        double totalCostBeforeDiscount = 0.0;
             for (Itemable item : basket) {
                 Food food = (Food) item;
                 Double priceByQuantity = food.getPrice() * food.getQuantity();
                 totalCostBeforeDiscount += priceByQuantity;
             }
-            return totalCostBeforeDiscount;
+        return totalCostBeforeDiscount;
     }
 
     public Double checkBogof(){
         Double beforeDis = totalCostBeforeDiscount();
-        Double bogofChecked = bogof.discount(beforeDis, this.basket);
-        return bogofChecked;
+        return bogof.discount(beforeDis, this.basket);
+
     }
 
     public Double checkTenPercent(){
         Double beforeDis = checkBogof();
-        Double discountCheckedPrice = tenPercent.discount(beforeDis);
-        return discountCheckedPrice;
+        return tenPercent.discount(beforeDis);
+
+    }
+
+    public Double checkLoyaltyDiscount(){
+        Double priceAfterAllOtherDiscounts = checkTenPercent();
+        Boolean hasLoyalty = this.getCard();
+        return loyaltyCard.discount(priceAfterAllOtherDiscounts, hasLoyalty);
     }
 
 }

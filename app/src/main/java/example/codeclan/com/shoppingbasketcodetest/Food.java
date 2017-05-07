@@ -28,7 +28,6 @@ public class Food implements Itemable, Objectable {
         return this.name = newName;
     }
 
-
     public int getQuantity() {
         return quantity;
     }
@@ -37,18 +36,13 @@ public class Food implements Itemable, Objectable {
         return this.quantity = newQuantity;
     }
 
-
     public Double getPrice() {
         return price;
     }
-    
-    
-
 
     public Boolean getBogof(){
         return this.bogof;
     }
-
 
     public void setPrice(Double price) {
         this.price = price;

@@ -25,31 +25,18 @@ public class TestCustomer {
     public void before(){
         customer1 = new Customer(true);
         customer2 = new Customer(false);
-        basket1 = new Basket();
-        basket2 = new Basket();
+        basket1 = new Basket(true);
+        basket2 = new Basket(false);
         food1 = new Food("Eggs", 2, 10.0, false);
         food2 = new Food("Soup", 2, 10.0, false);
         basket1.addToBasket(food1);
         basket2.addToBasket(food2);
-        customer1.addToHand(basket1);
-
     }
-
-
-    @Test
-    public void testNothingInHand(){
-        assertEquals(0, customer2.anythingInHand());
-    }
-
-    @Test
-    public void testAddBasketToHand(){
-        assertEquals(1, customer1.anythingInHand());
-    }
-
+    
     @Test
     public void testCustomerCanHaveLoyaltyCard(){
-        assertTrue(customer1.loyaltyCard());
-        assertFalse(customer2.loyaltyCard());
+        assertTrue(customer1.getHand());
+        assertFalse(customer2.getHand());
     }
 
 }

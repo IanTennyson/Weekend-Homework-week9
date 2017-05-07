@@ -1,13 +1,9 @@
 package example.codeclan.com.shoppingbasketcodetest;
 
-import android.content.Context;
-
 import org.junit.Before;
 import org.junit.Test;
 
 import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertFalse;
-import static junit.framework.Assert.assertTrue;
 
 /**
  * Created by user on 05/05/2017.
@@ -15,7 +11,6 @@ import static junit.framework.Assert.assertTrue;
 
 public class TestBasket {
 
-    Customer customer;
     Basket basket;
     Food food1;
     Food food2;
@@ -24,8 +19,8 @@ public class TestBasket {
 
     @Before
     public void before(){
-        customer = new Customer(true);
-        basket = new Basket();
+
+        basket = new Basket(true);
         food1 = new Food("Eggs", 2, 10.0, false);
         food2 = new Food("Milk", 4, 10.0, true);
         food3 = new Food("Bread", 2, 10.0, false);
@@ -33,7 +28,6 @@ public class TestBasket {
         basket.addToBasket(food1);
         basket.addToBasket(food2);
         basket.addToBasket(food3);
-        customer.addToHand(basket);
     }
 
     @Test
@@ -75,13 +69,8 @@ public class TestBasket {
     }
 
     @Test
-    public void testCustomerHasCard(){
-        assertTrue(customer.loyaltyCard());
-    }
-
-    @Test
     public void testCostAfterLoyalty(){
-
+        assertEquals(52.92, basket.checkLoyaltyDiscount());
     }
 
 }

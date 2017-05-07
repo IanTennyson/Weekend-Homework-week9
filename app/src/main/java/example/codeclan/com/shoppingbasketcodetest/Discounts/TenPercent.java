@@ -12,8 +12,7 @@ public class TenPercent implements Discountable {
         if (totalCostBeforeDiscount >= 20.0){
             Double onePercent = totalCostBeforeDiscount / 100;
             Double tenPercent = onePercent * 10;
-            Double newPrice = totalCostBeforeDiscount - tenPercent;
-            return newPrice;
+            return totalCostBeforeDiscount - tenPercent;
         }
         return totalCostBeforeDiscount;
     }
