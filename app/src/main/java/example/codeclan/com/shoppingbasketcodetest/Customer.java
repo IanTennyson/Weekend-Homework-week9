@@ -11,16 +11,29 @@ public class Customer {
     private Objectable[] hand;
 
     public Customer(Boolean hasCard){
-        this.hasCard =hasCard;
+        this.hasCard = hasCard;
         this.hand = new Objectable[1];
     }
 
     public int anythingInHand(){
-            if(hand != null){
-               return 0;
+        int count = 0;
+        for (Objectable object : this.hand) {
+            if (object != null) {
+                count ++;
             }
-        return 1;
+        }
+        return count;
         }
 
+    public void addToHand(Objectable object){
+        if (anythingInHand() == 1){
+            return;
+        }
+        int anythingInHand = anythingInHand();
+        this.hand[anythingInHand] = object;
+    }
 
+    public boolean loyaltyCard(){
+        return this.hasCard;
+    }
 }

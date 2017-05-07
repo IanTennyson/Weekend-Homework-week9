@@ -11,15 +11,15 @@ import example.codeclan.com.shoppingbasketcodetest.Interfaces.Itemable;
  */
 
 public class Bogof implements Discountable {
-    private ArrayList<Itemable> basket;
+//    private ArrayList<Itemable> basket;
     private Itemable item;
 
-    public Bogof(){
-        basket = new ArrayList<Itemable>();
-    }
+//    public Bogof(){
+//        basket = new ArrayList<Itemable>();
+//    }
 
-    public Double discount(Double priceBeforeDiscounts) {
-        for (Itemable item : basket) {
+    public Double discount(Double priceBeforeDiscounts, ArrayList basket) {
+        for (Object item : basket) {
             Food food = (Food) item;
             if (food.getBogof() && food.getQuantity() > 1) {
                 if (food.getQuantity() % 2 == 0) {

@@ -3,6 +3,7 @@ package example.codeclan.com.shoppingbasketcodetest;
 import java.util.ArrayList;
 
 import example.codeclan.com.shoppingbasketcodetest.Discounts.Bogof;
+import example.codeclan.com.shoppingbasketcodetest.Discounts.LoyaltyCard;
 import example.codeclan.com.shoppingbasketcodetest.Discounts.TenPercent;
 import example.codeclan.com.shoppingbasketcodetest.Interfaces.Itemable;
 import example.codeclan.com.shoppingbasketcodetest.Interfaces.Objectable;
@@ -15,6 +16,7 @@ public class Basket implements Objectable {
     private ArrayList<Itemable> basket;
     private TenPercent tenPercent;
     private Bogof bogof;
+    private LoyaltyCard loyaltyCard;
 
     public Basket(){
         basket = new ArrayList<Itemable>();
@@ -42,7 +44,6 @@ public class Basket implements Objectable {
         basket.clear();
     }
 
-
     public Double totalCostBeforeDiscount() {
             double totalCostBeforeDiscount = 0.0;
             for (Itemable item : basket) {
@@ -55,28 +56,9 @@ public class Basket implements Objectable {
 
     public Double checkBogof(){
         Double beforeDis = totalCostBeforeDiscount();
-        Double bogofChecked = discount(beforeDis);
+        Double bogofChecked = bogof.discount(beforeDis, this.basket);
         return bogofChecked;
     }
-
-    public Double discount(Double priceBeforeDiscounts) {
-            for (Itemable item : Basket.this.getItemList()) {
-                Food food = (Food) item;
-                if (food.getBogof() && food.getQuantity() > 1) {
-                    if (food.getQuantity() % 2 == 0) {
-                        double halfTheQuantity = food.getQuantity() / 2;
-                        double HalfOff = halfTheQuantity * food.getPrice();
-                        priceBeforeDiscounts = priceBeforeDiscounts - HalfOff;
-                    } else {
-                        double quantityMadeEven = food.getQuantity() - 1;
-                        double halfTheQuantity = quantityMadeEven / 2;
-                        double HalfOff = halfTheQuantity * food.getPrice();
-                        priceBeforeDiscounts = priceBeforeDiscounts - HalfOff;
-                    }
-                }
-            }
-        return priceBeforeDiscounts;
-        }
 
     public Double checkTenPercent(){
         Double beforeDis = checkBogof();
