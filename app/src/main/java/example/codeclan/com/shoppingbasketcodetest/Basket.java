@@ -1,29 +1,32 @@
 package example.codeclan.com.shoppingbasketcodetest;
 
-import android.content.Context;
-
 import java.util.ArrayList;
+
+import example.codeclan.com.shoppingbasketcodetest.Discounts.Bogof;
+import example.codeclan.com.shoppingbasketcodetest.Discounts.TenPercent;
+import example.codeclan.com.shoppingbasketcodetest.Interfaces.Itemable;
+import example.codeclan.com.shoppingbasketcodetest.Interfaces.Objectable;
 
 /**
  * Created by user on 05/05/2017.
  */
 
-public class Basket{
-    private ArrayList<Item> basket;
+public class Basket implements Objectable {
+    private ArrayList<Itemable> basket;
     private TenPercent tenPercent;
     private Bogof bogof;
 
     public Basket(){
-        basket = new ArrayList<Item>();
+        basket = new ArrayList<Itemable>();
         tenPercent = new TenPercent();
         bogof = new Bogof();
     }
 
-    public ArrayList<Item> getItemList(){
+    public ArrayList<Itemable> getItemList(){
         return this.basket;
     }
 
-    public void addToBasket(Item item){
+    public void addToBasket(Itemable item){
         basket.add(item);
     }
 
@@ -31,7 +34,7 @@ public class Basket{
         return basket.size();
     }
 
-    public void remove(Item item) {
+    public void remove(Itemable item) {
         basket.remove(item);
     }
 
@@ -42,7 +45,7 @@ public class Basket{
 
     public Double totalCostBeforeDiscount() {
             double totalCostBeforeDiscount = 0.0;
-            for (Item item : basket) {
+            for (Itemable item : basket) {
                 Food food = (Food) item;
                 Double priceByQuantity = food.getPrice() * food.getQuantity();
                 totalCostBeforeDiscount += priceByQuantity;
@@ -56,14 +59,8 @@ public class Basket{
         return bogofChecked;
     }
 
-//    public Double checkTenPercent(){
-//        Double beforeDis = checkBogof();
-//        Double discountCheckedPrice = tenPercent.discount(beforeDis);
-//        return discountCheckedPrice;
-//    }
-
     public Double discount(Double priceBeforeDiscounts) {
-            for (Item item : Basket.this.getItemList()) {
+            for (Itemable item : Basket.this.getItemList()) {
                 Food food = (Food) item;
                 if (food.getBogof() && food.getQuantity() > 1) {
                     if (food.getQuantity() % 2 == 0) {
@@ -80,5 +77,11 @@ public class Basket{
             }
         return priceBeforeDiscounts;
         }
+
+    public Double checkTenPercent(){
+        Double beforeDis = checkBogof();
+        Double discountCheckedPrice = tenPercent.discount(beforeDis);
+        return discountCheckedPrice;
+    }
 
 }

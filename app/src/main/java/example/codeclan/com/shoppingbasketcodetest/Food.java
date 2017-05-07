@@ -1,15 +1,13 @@
 package example.codeclan.com.shoppingbasketcodetest;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-
-import static android.R.attr.name;
+import example.codeclan.com.shoppingbasketcodetest.Interfaces.Itemable;
+import example.codeclan.com.shoppingbasketcodetest.Interfaces.Objectable;
 
 /**
  * Created by user on 05/05/2017.
  */
 
-public class Food implements Item{
+public class Food implements Itemable, Objectable {
     private String name;
     private int quantity;
     private Double price;

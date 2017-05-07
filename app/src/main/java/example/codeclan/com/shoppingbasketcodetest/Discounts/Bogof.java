@@ -1,21 +1,25 @@
-package example.codeclan.com.shoppingbasketcodetest;
+package example.codeclan.com.shoppingbasketcodetest.Discounts;
 
 import java.util.ArrayList;
+
+import example.codeclan.com.shoppingbasketcodetest.Food;
+import example.codeclan.com.shoppingbasketcodetest.Interfaces.Discountable;
+import example.codeclan.com.shoppingbasketcodetest.Interfaces.Itemable;
 
 /**
  * Created by user on 06/05/2017.
  */
 
-public class Bogof implements Discount{
-    private ArrayList<Item> basket;
-    private Item item;
+public class Bogof implements Discountable {
+    private ArrayList<Itemable> basket;
+    private Itemable item;
 
     public Bogof(){
-        basket = new ArrayList<Item>();
+        basket = new ArrayList<Itemable>();
     }
 
     public Double discount(Double priceBeforeDiscounts) {
-        for (Item item : basket) {
+        for (Itemable item : basket) {
             Food food = (Food) item;
             if (food.getBogof() && food.getQuantity() > 1) {
                 if (food.getQuantity() % 2 == 0) {
